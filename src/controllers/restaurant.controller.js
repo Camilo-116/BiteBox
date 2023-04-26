@@ -92,7 +92,11 @@ export async function deleteRestaurant(req, res) {
     const { restaurantId } = req.params;
 
     try {
-        const restaurant = await Restaurant.findByIdAndUpdate(restaurantId, { isDeleted: true });
+        const restaurant = await Restaurant.findByIdAndUpdate(
+            restaurantId,
+            { isDeleted: true },
+            { new: true }
+        );
 
         if (!restaurant) {
             return res.status(404).json({ message: 'Restaurant not found' });

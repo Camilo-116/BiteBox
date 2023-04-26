@@ -10,7 +10,7 @@ const orderSchema = new mongoose.Schema(
         courier: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
-            required: true
+            default: null
         },
         restaurant: {
             type: String,
@@ -20,6 +20,11 @@ const orderSchema = new mongoose.Schema(
             type: String,
             enum: ['Created', 'Sent', 'Accepted', 'Received', 'Arrived', 'Finished'],
             default: 'Created'
+        },
+        createdAt: {
+            type: Date,
+            immutable: true,
+            default: Date.now
         },
         products: [{
             name: {
