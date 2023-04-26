@@ -18,12 +18,6 @@ const productSchema = new mongoose.Schema(
             min: 0,
             required: true
         },
-        reviews: {
-            type: Number,
-            min: 0,
-            max: 5,
-            required: true
-        },
         category: {
             type: String,
             trim: true,

@@ -3,7 +3,15 @@ import User from '../models/user.model';
 
 export async function getUserbyID(req, res) {
 
-    const user = await User.findById(req.params.userId);
+    const user = await User.findById(req.params.userId, (err, user) => {
+        if (err) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        if (user.isDeleted) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+    });
+
     if (!user) {
         return res.status(404).json({ error: 'User not found' });
     }
@@ -12,7 +20,7 @@ export async function getUserbyID(req, res) {
 
 export async function getUserByEmailAndPassword(req, res) {
     const { email, password } = req.body;
-    const user = await User.findOne({ email: email, password: password });
+    const user = await User.findOne({ email: email, password: password, isDeleted: false }, (err, user) => { });
     if (!user) {
         return res.status(404).json({ error: 'User not found' });
     }
@@ -33,8 +41,8 @@ export async function createUser(req, res) {
             address,
             userType
         });
-        const result = await user.save();
-        res.status(200).json(result);
+        const newUser = await user.save();
+        res.status(200).json(newUser);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -47,7 +55,7 @@ export async function updateUser(req, res) {
         address, userType, restaurants } = req.body;
     try {
         const updatedUser = await User.findOneAndUpdate(
-            { _id: userId },
+            { _id: userId, isDeleted: false },
             {
                 $set: {
                     fullName: {

@@ -3,7 +3,14 @@ import Restaurant from '../models/restaurant.model';
 
 export async function getRestaurantbyID(req, res) {
 
-    const restaurant = await Restaurant.findById(req.params.restaurantId);
+    const restaurant = await Restaurant.findById(req.params.restaurantId, (err, restaurant) => {
+        if (err) {
+            return res.status(500).json(err);
+        }
+        if (restaurant.isDeleted) {
+            return res.status(404).json({ error: 'Restaurant not found' });
+        }
+    });
     if (!restaurant) {
         return res.status(404).json({ error: 'Restaurant not found' });
     }
@@ -11,9 +18,9 @@ export async function getRestaurantbyID(req, res) {
 }
 
 export async function getRestaurantByNameAOCategory(req, res) {
-    const { name, category } = req.query;
+    const { name, category } = req.body;
 
-    const query = {};
+    const query = { isDeleted: false };
 
     if (name) {
         query.name = { $regex: name, $options: 'i' };
@@ -58,7 +65,7 @@ export async function updateRestaurant(req, res) {
         categories, admin } = req.body;
     try {
         const updatedRestaurant = await Restaurant.findOneAndUpdate(
-            { _id: restaurantId },
+            { _id: restaurantId, isDeleted: false },
             {
                 $set: {
                     name,
