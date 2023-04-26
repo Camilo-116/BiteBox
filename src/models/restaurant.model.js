@@ -10,14 +10,12 @@ const restaurantSchema = new mongoose.Schema(
             required: true
         },
         address: {
-            type: String,
-            trim: true,
-            minlength: 3,
+            type: Number,
             required: true
         },
         products: {
             type: [String],
-            required: true
+            default: []
         },
         categories: {
             type: [String],
@@ -26,7 +24,7 @@ const restaurantSchema = new mongoose.Schema(
         popularity: {
             type: Number,
             min: 0,
-            required: true
+            default: 0
         },
         admin: {
             type: mongoose.Schema.Types.ObjectId,

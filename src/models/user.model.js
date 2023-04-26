@@ -41,9 +41,7 @@ const userSchema = new mongoose.Schema(
             required: true
         },
         address: {
-            type: String,
-            trim: true,
-            minlength: 3,
+            type: Number,
             required: true
         },
         userType: {

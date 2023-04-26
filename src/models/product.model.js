@@ -31,7 +31,7 @@ const productSchema = new mongoose.Schema(
         },
         restaurant: {
             type: String,
-            required: true
+            default: ""
         },
         isDeleted: {
             type: Boolean,

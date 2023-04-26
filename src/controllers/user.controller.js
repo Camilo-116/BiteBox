@@ -3,7 +3,7 @@ import User from '../models/user.model';
 
 export async function getUserbyID(req, res) {
 
-    const user = await Empanada.findById(req.params.userId);
+    const user = await User.findById(req.params.userId);
     if (!user) {
         return res.status(404).json({ error: 'User not found' });
     }
@@ -12,7 +12,7 @@ export async function getUserbyID(req, res) {
 
 export async function getUserByEmailAndPassword(req, res) {
     const { email, password } = req.body;
-    const user = await Empanada.findOne({ email: email, password: password });
+    const user = await User.findOne({ email: email, password: password });
     if (!user) {
         return res.status(404).json({ error: 'User not found' });
     }
@@ -27,11 +27,11 @@ export async function createUser(req, res) {
         } = req.body;
         const user = new User({
             fullName: { firstName, middleNames, lastNames },
-            email: email,
-            password: password,
-            phone: phone,
-            address: address,
-            userType: userType
+            email,
+            password,
+            phone,
+            address,
+            userType
         });
         const result = await user.save();
         res.status(200).json(result);
