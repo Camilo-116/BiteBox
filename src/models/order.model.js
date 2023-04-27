@@ -43,6 +43,10 @@ const orderSchema = new mongoose.Schema(
         total: {
             type: Number,
             required: true
+        },
+        isDeleted: {
+            type: Boolean,
+            default: false
         }
     },
     {

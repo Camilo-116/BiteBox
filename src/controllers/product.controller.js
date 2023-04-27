@@ -37,23 +37,26 @@ export async function createProduct(req, res) {
     }
 }
 
-export async function getProductbyID(req, res) {
-    const product = await Product.findById(req.params.productId, (err, product) => {
-        if (err) {
-            return res.status(500).json(err);
-        }
-        if (product.isDeleted) {
-            return res.status(404).json({ error: 'Product not found' });
-        }
-    });
-    if (!product) {
+export async function getProducts(req, res) {
+    try {
+        const products = await Product.find({ isDeleted: false });
+        res.status(200).json(products);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json(err);
+    }
+}
+
+export async function getProductByID(req, res) {
+    const product = await Product.findById(req.params.productId);
+    if (!product || product.isDeleted) {
         return res.status(404).json({ error: 'Product not found' });
     }
     res.status(200).json(product);
 }
 
 export async function getProductsByRestNameAOCategory(req, res) {
-    const { restaurantName, category } = req.body;
+    const { restaurantName, category } = req.query;
     const query = { isDeleted: false };
 
     if (restaurantName) {

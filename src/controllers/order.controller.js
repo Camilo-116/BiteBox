@@ -1,5 +1,14 @@
 import Order from '../models/order.model';
 
+export async function getOrders(req,res){
+    try {
+        const orders = await Order.find({isDeleted: false});
+        res.status(200).json(orders);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+}
+
 export async function getOrdersByFilters(req, res) {
     try {
         const { userId, courierId, restaurantName,
@@ -59,7 +68,7 @@ export async function getOrderByID(req, res) {
             await Order.findOne({ _id: orderId, isDeleted: false }).populate('user').populate('courier').populate('restaurant') :
             await Order.findOne({ _id: orderId, isDeleted: false });
 
-        if (!order) {
+        if (!order || order.isDeleted) {
             return res.status(404).json({ error: 'Order not found' });
         }
 

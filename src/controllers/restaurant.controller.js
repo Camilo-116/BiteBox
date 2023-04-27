@@ -1,24 +1,26 @@
 
 import Restaurant from '../models/restaurant.model';
 
-export async function getRestaurantbyID(req, res) {
+export async function getRestaurants(req, res) {
+    try {
+        const restaurants = await Restaurant.find({ isDeleted: false });
+        res.status(200).json(restaurants);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+}
 
-    const restaurant = await Restaurant.findById(req.params.restaurantId, (err, restaurant) => {
-        if (err) {
-            return res.status(500).json(err);
-        }
-        if (restaurant.isDeleted) {
-            return res.status(404).json({ error: 'Restaurant not found' });
-        }
-    });
-    if (!restaurant) {
+export async function getRestaurantByID(req, res) {
+
+    const restaurant = await Restaurant.findById(req.params.restaurantId);
+    if (!restaurant || restaurant.isDeleted) {
         return res.status(404).json({ error: 'Restaurant not found' });
     }
     res.status(200).json(restaurant);
 }
 
-export async function getRestaurantByNameAOCategory(req, res) {
-    const { name, category } = req.body;
+export async function getRestaurantsByNameAOCategory(req, res) {
+    const { name, category } = req.query;
 
     const query = { isDeleted: false };
 

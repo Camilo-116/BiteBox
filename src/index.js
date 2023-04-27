@@ -8,11 +8,7 @@ const app = express();
 // Conexión a MongoDB usando mongoose
 mongoose
   .connect(
-    'mongodb+srv://' +
-      process.env.MONGO_USER +
-      ':' +
-      process.env.MONGO_PASS +
-      '@cluster0.j7xqxtl.mongodb.net/dllo-backend-2023-10',
+    'mongodb://127.0.0.1:27017/BiteBox',
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -30,8 +26,8 @@ mongoose
 app.use(cors());
 app.use(express.json());
 
-import empanadaRoutes from './empanada/empanada.routes'
-app.use('/empanada', empanadaRoutes)
+import biteboxRoutes from './routes/bitebox.routes'
+app.use('/bitebox', biteboxRoutes)
 
 // Endpoint para 404
 app.use((req, res) => {
