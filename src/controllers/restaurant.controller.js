@@ -1,15 +1,6 @@
 
 import Restaurant from '../models/restaurant.model';
 
-export async function getRestaurants(req, res) {
-    try {
-        const restaurants = await Restaurant.find({ isDeleted: false });
-        res.status(200).json(restaurants);
-    } catch (err) {
-        res.status(500).json(err);
-    }
-}
-
 export async function getRestaurantByID(req, res) {
 
     const restaurant = await Restaurant.findById(req.params.restaurantId);
@@ -57,6 +48,7 @@ export async function createRestaurant(req, res) {
         const result = await restaurant.save();
         res.status(200).json(result);
     } catch (err) {
+        if (err.code == 11000) err.description = "Intended name is already registered by another restaurant.";
         res.status(500).json(err);
     }
 }
@@ -66,6 +58,17 @@ export async function updateRestaurant(req, res) {
     const { name, address, products,
         categories, admin } = req.body;
     try {
+        const updates = Object.keys(req.body);
+        const allowedUpdates = ['name', 'address', 'products', 'categories', 'admin'];
+        const allowedFields = updates.reduce((allowed, update) => {
+            if (!allowedUpdates.includes(update)) {
+                allowed.push(update);
+            }
+            return allowed;
+        }, []);
+        for (const f in allowedFields) {
+            console.log(`Field ${allowedFields[f]} won't be updated.`);
+        }
         const updatedRestaurant = await Restaurant.findOneAndUpdate(
             { _id: restaurantId, isDeleted: false },
             {

@@ -1,5 +1,20 @@
 const mongoose = require('mongoose');
 
+const productInOrderSchema = new mongoose.Schema({
+    name: {
+      type: String,
+      required: true
+    },
+    quantity: {
+      type: Number,
+      required: true
+    },
+    total: {
+      type: Number,
+      required: true
+    }
+  }, { _id: false });
+
 const orderSchema = new mongoose.Schema(
     {
         user: {
@@ -26,20 +41,11 @@ const orderSchema = new mongoose.Schema(
             immutable: true,
             default: Date.now
         },
-        products: [{
-            name: {
-                type: String,
-                required: true
-            },
-            quantity: {
-                type: Number,
-                required: true
-            },
-            total: {
-                type: Number,
-                required: true
-            }
-        }],
+        products: {
+            type: [productInOrderSchema],
+            strict: false,
+            required: true
+        },
         total: {
             type: Number,
             required: true
@@ -50,7 +56,7 @@ const orderSchema = new mongoose.Schema(
         }
     },
     {
-        timestamps: true
+        versionKey: false
     }
 );
 

@@ -31,7 +31,7 @@ app.use('/bitebox', biteboxRoutes)
 
 // Endpoint para 404
 app.use((req, res) => {
-  res.status(404).json({ message: 'Not found.' });
+  res.status(404).json({ message: 'This path might not be what you\'re looking for.' });
 });
 
 // Inicia app en puerto 8080

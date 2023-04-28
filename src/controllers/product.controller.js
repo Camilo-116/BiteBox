@@ -37,16 +37,6 @@ export async function createProduct(req, res) {
     }
 }
 
-export async function getProducts(req, res) {
-    try {
-        const products = await Product.find({ isDeleted: false });
-        res.status(200).json(products);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json(err);
-    }
-}
-
 export async function getProductByID(req, res) {
     const product = await Product.findById(req.params.productId);
     if (!product || product.isDeleted) {
@@ -81,6 +71,17 @@ export async function updateProduct(req, res) {
     const { productId } = req.params;
     const { name, description, price, category } = req.body;
     try {
+        const updates = Object.keys(req.body);
+        const allowedUpdates = ['name', 'description', 'price','category'];
+        const allowedFields = updates.reduce((allowed, update) => {
+            if (!allowedUpdates.includes(update)) {
+                allowed.push(update);
+            }
+            return allowed;
+        }, []);
+        for (const f in allowedFields) {
+            console.log(`Field ${allowedFields[f]} won't be updated.`);
+        }
         const updatedProduct = await Product.findOneAndUpdate(
             { _id: productId, isDeleted: false },
             {

@@ -1,9 +1,9 @@
 
 import User from '../models/user.model';
 
-export async function getUsers(req, res){
+export async function getUsers(req, res) {
     try {
-        const users = await User.find({isDeleted: false});
+        const users = await User.find({ isDeleted: false });
         res.status(200).json(users);
     } catch (err) {
         res.status(500).json(err);
@@ -44,8 +44,11 @@ export async function createUser(req, res) {
             userType
         });
         const newUser = await user.save();
+        console.log(newUser);
         res.status(200).json(newUser);
+
     } catch (err) {
+        if (err.code == 11000) err.description = "Intended email is already in use.";
         res.status(500).json(err);
     }
 }
@@ -56,15 +59,26 @@ export async function updateUser(req, res) {
         email, password, phone,
         address, userType, restaurants } = req.body;
     try {
+        const updates = Object.keys(req.body);
+        const allowedUpdates = ['firstName', 'middleNames', 'lastNames',
+            'email', 'password', 'phone',
+            'address', 'userType', 'restaurants'];
+        const allowedFields = updates.reduce((allowed, update) => {
+            if (!allowedUpdates.includes(update)) {
+                allowed.push(update);
+            }
+            return allowed;
+        }, []);
+        for (const f in allowedFields) {
+            console.log(`Field ${allowedFields[f]} won't be updated.`);
+        }
         const updatedUser = await User.findOneAndUpdate(
             { _id: userId, isDeleted: false },
             {
                 $set: {
-                    fullName: {
-                        firstName,
-                        middleNames,
-                        lastNames,
-                    },
+                    'fullName.firstName': firstName,
+                    'fullName.middleNames': middleNames,
+                    'fullName.lastNames': lastNames,
                     email,
                     password,
                     phone,
