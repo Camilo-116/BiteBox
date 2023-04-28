@@ -1,6 +1,7 @@
 import Order from '../models/order.model';
 import Product from '../models/product.model';
 import User from '../models/user.model';
+import Restaurant from '../models/restaurant.model';
 
 export async function getOrdersByFilters(req, res) {
     try {
@@ -91,6 +92,11 @@ export async function createOrder(req, res) {
 
         const total = products.reduce((acc, p) => acc + p.total, 0);
 
+        const orderRestaurant = await Restaurant.findOne({ name: restaurant, isDeleted: false });
+        if (!orderRestaurant) {
+            return res.status(404).json({ error: 'Restaurant not found' });
+        }
+
         const order = new Order({
             user,
             restaurant,
@@ -98,8 +104,8 @@ export async function createOrder(req, res) {
             total
         });
 
-        const result = await order.save();
-        res.status(200).json(result);
+        const newOrder = await order.save();
+        res.status(200).json(newOrder);
     } catch (err) {
         console.error(err);
         res.status(500).json(err);
@@ -118,6 +124,12 @@ export async function sendOrder(req, res) {
         if (!sentOrder) {
             return res.status(404).json({ error: 'Order not found' });
         }
+        const restaurantAfterOrder = await Restaurant.findOneAndUpdate(
+            { name: sentOrder.restaurant, isDeleted: false },
+            { $inc: { popularity: 1 } },
+            { new: true }
+        );
+        console.log(`${sentOrder.restaurant} popularity increased to ${restaurantAfterOrder.popularity}.`)
         res.status(200).json(sentOrder);
     } catch (err) {
         console.error(err);
