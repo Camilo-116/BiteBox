@@ -5,6 +5,10 @@ export async function createProduct(req, res) {
     try {
         const { name, description, price, category, restaurant } = req.body;
 
+        if (!req.session.restaurants.includes(restaurant)) {
+            return res.status(401).json({ error: 'Unauthorized' });
+        }
+
         const product = new Product({
             name,
             description,
@@ -33,6 +37,7 @@ export async function createProduct(req, res) {
         }
         res.status(200).json(newProduct);
     } catch (err) {
+        console.log(err);
         res.status(500).json(err);
     }
 }
@@ -46,7 +51,23 @@ export async function getProductByID(req, res) {
 }
 
 export async function getProductsByRestNameAOCategory(req, res) {
-    const { restaurantName, category } = req.query;
+
+    let restaurantName, category;
+    let queryType;
+
+    if (req.path.includes('menu')) {
+        restaurantName = req.params.restaurantName;
+        category = req.body.category;
+        queryType = 1;
+    } else if (req.path.includes('inventory')) {
+        if (!req.session.restaurants || !req.session.restaurants.includes(req.params.restaurantName)) return res.status(401).json({ error: 'Unauthorized' });
+        restaurantName = req.params.restaurantName;
+        queryType = 2;
+    } else {
+        restaurantName = req.query.restaurantName;
+        queryType = 0;
+    }
+
     const query = { isDeleted: false };
 
     if (restaurantName) {
@@ -56,7 +77,14 @@ export async function getProductsByRestNameAOCategory(req, res) {
         query.category = category;
     }
     try {
-        const products = await Product.find(query);
+        const products = (queryType == 0 || queryType == 2) ?
+            await Product.find(query) :
+            await Product.aggregate([
+                { $match: query }, // filter by the specified query
+                { $sort: { category: 1 } }, // sort by category in ascending order
+                { $group: { _id: "$category", products: { $push: "$$ROOT" } } }, // group by category and create an array of products for each category
+                { $project: { _id: 0, category: "$_id", products: 1 } } // rename _id to category and remove the _id field
+            ]);
         if (!products) {
             return res.status(404).json({ error: 'No products found' });
         }
@@ -70,9 +98,13 @@ export async function getProductsByRestNameAOCategory(req, res) {
 export async function updateProduct(req, res) {
     const { productId } = req.params;
     const { name, description, price, category } = req.body;
+
     try {
+        const p = await Product.findById(productId);
+        if (!req.session.restaurants || !req.session.restaurants.includes(p.restaurant)) return res.status(401).json({ error: 'Unauthorized' });
+
         const updates = Object.keys(req.body);
-        const allowedUpdates = ['name', 'description', 'price','category'];
+        const allowedUpdates = ['name', 'description', 'price', 'category'];
         const allowedFields = updates.reduce((allowed, update) => {
             if (!allowedUpdates.includes(update)) {
                 allowed.push(update);
@@ -130,6 +162,9 @@ export async function deleteProduct(req, res) {
     const { productId } = req.params;
 
     try {
+        const p = await Product.findById(productId);
+        if (!req.session.restaurants || !req.session.restaurants.includes(p.restaurant)) return res.status(401).json({ error: 'Unauthorized' });
+
         const product = await Product.findByIdAndUpdate(productId, { isDeleted: true });
 
         if (!product) {

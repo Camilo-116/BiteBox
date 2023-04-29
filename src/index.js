@@ -25,6 +25,19 @@ mongoose
 // Middlewares
 app.use(cors());
 app.use(express.json());
+const cookieParser = require("cookie-parser");
+const sessions = require('express-session');
+
+const oneDay = 1000 * 60 * 60 * 24;
+app.use(sessions({
+    secret: "thisismysecretkey",
+    saveUninitialized:true,
+    cookie: { maxAge: oneDay },
+    resave: false 
+}));
+
+app.use(cookieParser());
+
 
 import biteboxRoutes from './routes/bitebox.routes'
 app.use('/bitebox', biteboxRoutes)

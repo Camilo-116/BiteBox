@@ -22,11 +22,16 @@ export async function getUserByID(req, res) {
 
 export async function getUserByEmailAndPassword(req, res) {
     const { email, password } = req.query;
-    const user = await User.findOne({ email: email, password: password, isDeleted: false });
+    const user = await queryUserByEmailAndPassword(email, password);
     if (!user) {
         return res.status(404).json({ error: 'User not found' });
     }
     res.status(200).json(user);
+}
+
+export async function queryUserByEmailAndPassword(email, password) {
+    const user = await User.findOne({ email: email, password: password, isDeleted: false });
+    return user;
 }
 
 export async function createUser(req, res) {

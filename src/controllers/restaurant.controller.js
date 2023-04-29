@@ -1,5 +1,6 @@
 
 import Restaurant from '../models/restaurant.model';
+import User from '../models/user.model';
 
 export async function getRestaurantByID(req, res) {
 
@@ -24,7 +25,7 @@ export async function getRestaurantsByNameAOCategory(req, res) {
     }
 
     try {
-        const restaurants = await Restaurant.find(query);
+        const restaurants = await Restaurant.find(query).sort({ popularity: -1 });
         res.status(200).json(restaurants);
         if (!restaurants) {
             return res.status(404).json({ error: 'Restaurant not found' });
@@ -38,17 +39,35 @@ export async function getRestaurantsByNameAOCategory(req, res) {
 export async function createRestaurant(req, res) {
     try {
         const { name, address,
-            categories, admin } = req.body;
+            categories } = req.body;
+        const admin = req.session.userId;
+        if (!admin || req.session.userType !== 'admin') {
+            return res.status(401).json({ error: 'Unauthorized' });
+        }
         const restaurant = new Restaurant({
             name,
             address,
             categories,
             admin
         });
-        const result = await restaurant.save();
-        res.status(200).json(result);
+        const newRestaurant = await restaurant.save();
+        if (!newRestaurant) {
+            return res.status(500).json({ error: 'Restaurant not created' });
+        }
+        const adminAfterRestaurantCreation = await User.findByIdAndUpdate(
+            admin,
+            { $push: { restaurants: newRestaurant.name } },
+            { new: true }
+        );
+        if (!adminAfterRestaurantCreation || !adminAfterRestaurantCreation.restaurants.includes(newRestaurant.name)) {
+            await Restaurant.deleteOne({ _id: newRestaurant._id });
+            return res.status(500).json({ error: 'Restaurant not created' });
+        }
+        req.session.restaurants = adminAfterRestaurantCreation.restaurants;
+        res.status(200).json(newRestaurant);
     } catch (err) {
         if (err.code == 11000) err.description = "Intended name is already registered by another restaurant.";
+        console.log(err)
         res.status(500).json(err);
     }
 }
