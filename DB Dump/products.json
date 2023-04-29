@@ -1,0 +1,131 @@
+[{
+  "_id": {
+    "$oid": "644853239682a4013d8b6972"
+  },
+  "name": "Sticky Soy Ginger Wings",
+  "description": "Crispy chicken wings glazed with a sweet and savory soy ginger sauce, served with a side of spicy mayo for dipping.",
+  "price": 8.99,
+  "category": "Appetizers",
+  "restaurant": "The Naughty Noodle",
+  "isDeleted": false
+},{
+  "_id": {
+    "$oid": "6448542c9682a4013d8b697c"
+  },
+  "name": "Spicy Garlic Noodles",
+  "description": "Chewy wheat noodles tossed in a spicy garlic sauce with scallions, sesame seeds, and cilantro.",
+  "price": 12.99,
+  "category": "Noodle dishes",
+  "restaurant": "The Naughty Noodle",
+  "isDeleted": false
+},{
+  "_id": {
+    "$oid": "644854659682a4013d8b697d"
+  },
+  "name": "Kung Pao Shrimp with Fried Rice",
+  "description": "Stir-fried shrimp, peanuts, vegetables, and dried chili peppers in a spicy kung pao sauce, served with a side of fluffy fried rice.",
+  "price": 16.99,
+  "category": "Rice dishes",
+  "restaurant": "The Naughty Noodle",
+  "isDeleted": false
+},{
+  "_id": {
+    "$oid": "644854b79682a4013d8b697e"
+  },
+  "name": "Matcha Green Tea Cheesecake",
+  "description": "Creamy cheesecake infused with matcha green tea powder and a graham cracker crust, topped with whipped cream and a dusting of matcha powder.",
+  "price": 7.99,
+  "category": "Desserts",
+  "restaurant": "The Naughty Noodle",
+  "isDeleted": false
+},{
+  "_id": {
+    "$oid": "644855559682a4013d8b6980"
+  },
+  "name": "Hot and Spicy Jalapeño Poppers",
+  "description": "Fresh jalapeño peppers stuffed with cheddar cheese and coated with a crispy breading, served with a side of ranch dressing.",
+  "price": 9.99,
+  "category": "Appetizers",
+  "restaurant": "The Sizzler's Inn",
+  "isDeleted": false
+},{
+  "_id": {
+    "$oid": "644855889682a4013d8b6983"
+  },
+  "name": "Ribeye Steak",
+  "description": "A juicy 12 oz ribeye steak grilled to perfection, served with a loaded baked potato and garlic green beans.",
+  "price": 28.99,
+  "category": "Steak",
+  "restaurant": "The Sizzler's Inn",
+  "isDeleted": false
+},{
+  "_id": {
+    "$oid": "644855d89682a4013d8b6984"
+  },
+  "name": "Grilled Swordfish",
+  "description": "Fresh swordfish steak seasoned with herbs and spices and grilled to perfection, served with a side of roasted Brussels sprouts and a quinoa salad with cherry tomatoes, feta cheese, and lemon vinaigrette.",
+  "price": 27.99,
+  "category": "Seafood",
+  "restaurant": "The Sizzler's Inn",
+  "isDeleted": false
+},{
+  "_id": {
+    "$oid": "644855fb9682a4013d8b6985"
+  },
+  "name": "Warm Apple Crisp",
+  "description": "A warm and comforting dessert of sweet cinnamon-spiced apples baked with a crunchy oat topping and served with a scoop of vanilla ice cream.",
+  "price": 8.99,
+  "category": "Desserts",
+  "restaurant": "The Sizzler's Inn",
+  "isDeleted": false
+},{
+  "_id": {
+    "$oid": "644b1832ab51200bcb65d99e"
+  },
+  "name": "Salty Paws",
+  "description": "A savory and crunchy treat, perfect for gnawing on while you wait for your meal. These salted rodent paws are sourced locally from the finest disease-ridden vermin, and are sure to satisfy even the most discerning palate.",
+  "price": 6.99,
+  "category": "Appetizers",
+  "restaurant": "Rodent's Rabies",
+  "isDeleted": false
+},{
+  "_id": {
+    "$oid": "644b18fbab51200bcb65d9a1"
+  },
+  "name": "Smoked Prairie Dog",
+  "description": "Our signature dish features tender, slow-smoked prairie dog meat, seasoned with a blend of secret spices and served with a side of tangy barbecue sauce. Perfect for adventurous eaters looking to try something new and wild!",
+  "price": 14.99,
+  "category": "Adventurous Meals",
+  "restaurant": "Rodent's Rabies",
+  "isDeleted": false
+},{
+  "_id": {
+    "$oid": "644b1942ab51200bcb65d9a4"
+  },
+  "name": "Chipmunk Tenders",
+  "description": "These crispy and tender bites are made from only the finest, free-range chipmunks. Each tender is hand-breaded with a blend of savory spices and served with a side of sweet and tangy dipping sauce. Perfect for those looking for a unique and adventurous twist on classic chicken tenders!",
+  "price": 9.99,
+  "category": "Adventurous Meals",
+  "restaurant": "Rodent's Rabies",
+  "isDeleted": false
+},{
+  "_id": {
+    "$oid": "644b1987ab51200bcb65d9a7"
+  },
+  "name": "Freshly Baked Rat Biscuits",
+  "description": "These delicious and crunchy biscuits are made from only the freshest, free-range rats. Our expert bakers use a unique blend of high-quality ingredients to create a savory and satisfying treat that is perfect for any occasion. Each biscuit is lovingly baked to perfection and served fresh out of the oven. Try one today and you won't be able to resist!",
+  "price": 5.99,
+  "category": "Desserts",
+  "restaurant": "Rodent's Rabies",
+  "isDeleted": false
+},{
+  "_id": {
+    "$oid": "644c3ee9beddfd574aef20f2"
+  },
+  "name": "Parsley Chips",
+  "description": "Fried chips with a chilli-parsley side sauce.",
+  "price": 5.99,
+  "category": "Appetizers",
+  "restaurant": "Rustic Bites",
+  "isDeleted": false
+}]

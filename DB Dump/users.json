@@ -1,0 +1,83 @@
+[{
+  "_id": {
+    "$oid": "64484e8c9682a4013d8b6968"
+  },
+  "fullName": {
+    "firstName": "Jhon",
+    "middleNames": "",
+    "lastNames": "Doe"
+  },
+  "email": "yourkitten@gmail.com",
+  "password": "123456",
+  "address": 0,
+  "userType": "client",
+  "isDeleted": false,
+  "phone": "333333"
+},{
+  "_id": {
+    "$oid": "644850899682a4013d8b6969"
+  },
+  "fullName": {
+    "firstName": "Mildred",
+    "middleNames": "Rita",
+    "lastNames": "Pachuca"
+  },
+  "email": "yourdoggy@gmail.com",
+  "password": "123456",
+  "address": 20,
+  "userType": "courier",
+  "isDeleted": false,
+  "phone": "444444"
+},{
+  "_id": {
+    "$oid": "64491abb9682a4013d8b698c"
+  },
+  "fullName": {
+    "firstName": "Micheal",
+    "middleNames": "Venmo",
+    "lastNames": "Gas"
+  },
+  "email": "root@gmail.com",
+  "password": "123456",
+  "address": -50,
+  "userType": "admin",
+  "isDeleted": false,
+  "restaurants": [
+    "The Naughty Noodle",
+    "The Sizzler's Inn",
+    "Rodent's Rabies"
+  ],
+  "phone": "555555"
+},{
+  "_id": {
+    "$oid": "644b00892c90b0b15cbc3758"
+  },
+  "fullName": {
+    "firstName": "Richard",
+    "middleNames": "Steven Mark IV",
+    "lastNames": "Rock"
+  },
+  "email": "notToor@outlook.com",
+  "password": "123456",
+  "phone": "888888",
+  "address": 12,
+  "userType": "client",
+  "isDeleted": false
+},{
+  "_id": {
+    "$oid": "644bd01788833468ab0d62cb"
+  },
+  "fullName": {
+    "firstName": "Glee",
+    "lastNames": "Ferguson"
+  },
+  "email": "ggez@gmail.com",
+  "password": "123456",
+  "phone": "999999",
+  "address": 2,
+  "userType": "admin",
+  "restaurants": [
+    "Rustic Bites"
+  ],
+  "isDeleted": false
+}]

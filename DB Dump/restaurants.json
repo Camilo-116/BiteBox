@@ -1,0 +1,82 @@
+[{
+  "_id": {
+    "$oid": "644851109682a4013d8b696c"
+  },
+  "name": "The Naughty Noodle",
+  "address": -30,
+  "products": [
+    "Sticky Soy Ginger Wings",
+    "Spicy Garlic Noodles",
+    "Kung Pao Shrimp with Fried Rice",
+    "Matcha Green Tea Cheesecake"
+  ],
+  "categories": [
+    "Asian cuisine",
+    "Fusion cuisine"
+  ],
+  "popularity": 1,
+  "admin": {
+    "$oid": "64491abb9682a4013d8b698c"
+  },
+  "isDeleted": false
+},{
+  "_id": {
+    "$oid": "644851e79682a4013d8b696d"
+  },
+  "name": "The Sizzler's Inn",
+  "address": 15,
+  "products": [
+    "Hot and Spicy Jalapeño Poppers",
+    "Ribeye Steak",
+    "Grilled Swordfish",
+    "Warm Apple Crisp"
+  ],
+  "categories": [
+    "Grill",
+    "Flame-cook"
+  ],
+  "popularity": 1,
+  "admin": {
+    "$oid": "64491abb9682a4013d8b698c"
+  },
+  "isDeleted": false
+},{
+  "_id": {
+    "$oid": "644b162aab51200bcb65d98f"
+  },
+  "name": "Rodent's Rabies",
+  "address": 800,
+  "products": [
+    "Salty Paws",
+    "Chipmunk Tenders",
+    "Freshly Baked Rat Biscuits"
+  ],
+  "categories": [
+    "Asian cuisine",
+    "Thematic"
+  ],
+  "popularity": 2,
+  "admin": {
+    "$oid": "64491abb9682a4013d8b698c"
+  },
+  "isDeleted": false
+},{
+  "_id": {
+    "$oid": "644c3c16bbb502faf475e8c1"
+  },
+  "name": "Rustic Bites",
+  "address": 90,
+  "products": [
+    "Parsley Chips"
+  ],
+  "categories": [
+    "Grill",
+    "Thematic",
+    "Mediterranean cuisine"
+  ],
+  "popularity": 1,
+  "admin": {
+    "$oid": "644bd01788833468ab0d62cb"
+  },
+  "isDeleted": false
+}]

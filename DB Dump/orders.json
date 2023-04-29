@@ -1,0 +1,130 @@
+[{
+  "_id": {
+    "$oid": "644b2c67a278f4ddd75b7017"
+  },
+  "user": {
+    "$oid": "64484e8c9682a4013d8b6968"
+  },
+  "courier": {
+    "$oid": "644850899682a4013d8b6969"
+  },
+  "restaurant": "Rodent's Rabies",
+  "status": "Finished",
+  "products": [
+    {
+      "name": "Salty Paws",
+      "quantity": 2,
+      "total": 13.98
+    },
+    {
+      "name": "Smoked Prairie Dog",
+      "quantity": 5,
+      "total": 74.95
+    }
+  ],
+  "total": 88.93,
+  "isDeleted": false,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1682648167987"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "644bcef388833468ab0d62c4"
+  },
+  "user": {
+    "$oid": "644b00892c90b0b15cbc3758"
+  },
+  "courier": null,
+  "restaurant": "The Naughty Noodle",
+  "status": "Sent",
+  "products": [
+    {
+      "name": "Kung Pao Shrimp with Fried Rice",
+      "quantity": 18,
+      "total": 305.82
+    }
+  ],
+  "total": 305.82,
+  "isDeleted": false,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1682689779458"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "644c5c04ff8f7f2ec6e98b5e"
+  },
+  "user": {
+    "$oid": "644b00892c90b0b15cbc3758"
+  },
+  "restaurant": "Rustic Bites",
+  "status": "Finished",
+  "products": [
+    {
+      "name": "Parsley Chips",
+      "quantity": 25,
+      "total": 149.75
+    }
+  ],
+  "total": 149.75,
+  "isDeleted": false,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1682725892999"
+    }
+  },
+  "courier": {
+    "$oid": "644850899682a4013d8b6969"
+  }
+},{
+  "_id": {
+    "$oid": "644c6976fe9030583578ed29"
+  },
+  "user": {
+    "$oid": "64484e8c9682a4013d8b6968"
+  },
+  "courier": null,
+  "restaurant": "Rodent's Rabies",
+  "status": "Sent",
+  "products": [
+    {
+      "name": "Salty Paws",
+      "quantity": 3,
+      "total": 20.97
+    }
+  ],
+  "total": 20.97,
+  "isDeleted": false,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1682729334945"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "644c6a0afe9030583578ed33"
+  },
+  "user": {
+    "$oid": "64484e8c9682a4013d8b6968"
+  },
+  "courier": null,
+  "restaurant": "The Sizzler's Inn",
+  "status": "Sent",
+  "products": [
+    {
+      "name": "Ribeye Steak",
+      "quantity": 2,
+      "total": 57.98
+    }
+  ],
+  "total": 57.98,
+  "isDeleted": false,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1682729482007"
+    }
+  }
+}]
